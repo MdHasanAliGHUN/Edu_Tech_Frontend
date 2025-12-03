@@ -3,10 +3,13 @@ import { FaEyeSlash, FaGoogle } from "react-icons/fa";
 import { IoEyeOutline } from "react-icons/io5";
 import { Link, useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
+import useUserHook from "../../../hooks/useUserHook";
 
 const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
+  const { user, registerUser } = useUserHook();
+  console.log(user);
   const {
     register,
     handleSubmit,
@@ -16,8 +19,7 @@ const Register = () => {
 
   const onSubmit = async (data) => {
     try {
-        console.log(data)
-      navigate("/");
+      await registerUser(data);
     } catch (error) {
       console.log(error);
     }
@@ -90,7 +92,6 @@ const Register = () => {
           <button
             type="submit"
             className="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 rounded-lg transition cursor-pointer"
-            
           >
             Register
           </button>

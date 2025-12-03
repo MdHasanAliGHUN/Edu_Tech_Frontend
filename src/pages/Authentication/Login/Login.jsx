@@ -2,10 +2,12 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaEyeSlash, FaGoogle } from "react-icons/fa";
 import { IoEyeOutline } from "react-icons/io5";
+import useUserHook from "../../../hooks/useUserHook";
 
 import { Link } from "react-router";
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const { loginUser } = useUserHook();
   const {
     register,
     handleSubmit,
@@ -14,6 +16,7 @@ const Login = () => {
 
   const onSubmit = async (data) => {
     try {
+      await loginUser(data);
       console.log(data);
     } catch (error) {
       console.error("Login Error:", error);
