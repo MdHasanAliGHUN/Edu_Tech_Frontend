@@ -1,6 +1,6 @@
 import { createContext, useState } from "react";
 import axios from "axios";
-import { set } from "react-hook-form";
+import { toast } from "react-toastify";
 export const UserContext = createContext(null);
 
 const UserProvider = ({ children }) => {
@@ -15,9 +15,13 @@ const UserProvider = ({ children }) => {
         `http://localhost:5000/api/users/register`,
         userData
       );
+      toast.success("রেজিস্ট্রেশন সফল হয়েছে!");
       console.log(response.data);
       return response.data;
     } catch (error) {
+      toast.error(
+        error.response?.data?.message || "রেজিস্ট্রেশন ব্যর্থ হয়েছে!"
+      );
       console.log(error);
     } finally {
       setUserLoading(false);
@@ -32,11 +36,13 @@ const UserProvider = ({ children }) => {
         ` http://localhost:5000/api/users/login`,
         userData
       );
+
+      toast.success(" লগইন সফল হয়েছে!");
       console.log(response.data);
       setUser(response.data);
       return response.data;
     } catch (error) {
-      console.log(error);
+      toast.error(error.response?.data?.message || " লগইন ব্যর্থ হয়েছে!");
     } finally {
       setUserLoading(false);
     }
