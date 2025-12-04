@@ -3,14 +3,16 @@ import { useForm } from "react-hook-form";
 import { FaEyeSlash, FaGoogle } from "react-icons/fa";
 import { IoEyeOutline } from "react-icons/io5";
 import useUserHook from "../../../hooks/useUserHook";
+import { Link, useNavigate } from "react-router";
 
-import { Link } from "react-router";
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const { loginUser } = useUserHook();
+  const { loginUser, userLoading } = useUserHook();
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
 
@@ -18,6 +20,8 @@ const Login = () => {
     try {
       await loginUser(data);
       console.log(data);
+      reset();
+      navigate("/");
     } catch (error) {
       console.error("Login Error:", error);
     }
@@ -79,9 +83,9 @@ const Login = () => {
           {/* Login Button */}
           <button
             type="submit"
-            className="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 rounded-lg transition cursor-pointer"
+            className="font-playfair w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 rounded-lg transition cursor-pointer"
           >
-            Login
+            {userLoading ? "Logging in..." : "Login"}
           </button>
 
           {/* Divider */}

@@ -8,7 +8,7 @@ import useUserHook from "../../../hooks/useUserHook";
 const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
-  const { user, registerUser } = useUserHook();
+  const { user, registerUser, userLoading } = useUserHook();
   console.log(user);
   const {
     register,
@@ -20,6 +20,8 @@ const Register = () => {
   const onSubmit = async (data) => {
     try {
       await registerUser(data);
+      reset();
+      navigate("/login");
     } catch (error) {
       console.log(error);
     }
@@ -93,7 +95,7 @@ const Register = () => {
             type="submit"
             className="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 rounded-lg transition cursor-pointer"
           >
-            Register
+            {userLoading ? "Registering..." : "Register"}
           </button>
 
           {/* Divider */}

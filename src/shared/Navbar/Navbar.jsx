@@ -2,10 +2,13 @@ import { useState } from "react";
 import { Link, NavLink } from "react-router";
 import { CiMenuFries } from "react-icons/ci";
 import { RxCross2 } from "react-icons/rx";
-import MobileNavbar from "./MobileNavbar"
+import MobileNavbar from "./MobileNavbar";
+import useUserHook from "../../hooks/useUserHook";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
+  const { user, logoutUser } = useUserHook();
+  console.log(user);
   const navLinks = [
     { name: "Home", path: "/" },
     { name: "Courses", path: "/courses" },
@@ -39,13 +42,19 @@ const Navbar = () => {
         </ul>
 
         {/* Right: Login Button (Desktop) */}
-        <div className="hidden md:block">
-          <Link
-            to="/login"
-            className="px-6 py-2 bg-blue-600 text-white font-medium rounded hover:bg-blue-700 transition "
-          >
-            Login
-          </Link>
+        <div className="hidden md:block space-x-2">
+          {user ? (
+            <button onClick={logoutUser} className="px-6 py-1.5 bg-blue-600 text-white font-medium rounded hover:bg-blue-700 transition font-playfair cursor-pointer">
+              Log Out
+            </button>
+          ) : (
+            <Link
+              to="/login"
+              className="px-6 py-2 bg-blue-600 text-white font-medium rounded hover:bg-blue-700 transition "
+            >
+              Login
+            </Link>
+          )}
         </div>
 
         {/* Mobile Menu Icon */}
@@ -60,7 +69,7 @@ const Navbar = () => {
       </div>
 
       {/* Mobile Dropdown Menu */}
-      {open && <MobileNavbar navLinks={navLinks} setOpen={setOpen}/>}
+      {open && <MobileNavbar navLinks={navLinks} setOpen={setOpen} />}
     </nav>
   );
 };
