@@ -8,7 +8,7 @@ import useUserHook from "../../hooks/useUserHook";
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   const { user, logoutUser } = useUserHook();
-  console.log(user);
+
   const navLinks = [
     { name: "Home", path: "/" },
     { name: "Courses", path: "/courses" },
