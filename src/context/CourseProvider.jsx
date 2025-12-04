@@ -2,13 +2,17 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { createContext } from "react";
 
-
 export const CourseContext = createContext();
 
 const CourseProvider = ({ children }) => {
-
   // Fetch All Courses
-  const { data: courses = [], isLoading, isError, error, refetch} = useQuery({
+  const {
+    data: courses = [],
+    isLoading,
+    isError,
+    error,
+    refetch,
+  } = useQuery({
     queryKey: ["courses"],
     queryFn: async () => {
       const res = await axios.get("http://localhost:5000/api/course");
@@ -25,7 +29,6 @@ const CourseProvider = ({ children }) => {
     refetch,
   };
 
-  console.log(courses)
   return (
     <CourseContext.Provider value={coursesInfo}>
       {children}

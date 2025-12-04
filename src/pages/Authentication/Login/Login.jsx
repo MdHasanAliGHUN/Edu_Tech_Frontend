@@ -3,12 +3,16 @@ import { useForm } from "react-hook-form";
 import { FaEyeSlash, FaGoogle } from "react-icons/fa";
 import { IoEyeOutline } from "react-icons/io5";
 import useUserHook from "../../../hooks/useUserHook";
-import { Link, useNavigate } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const { loginUser, userLoading } = useUserHook();
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const from = location.state?.from?.pathname || "/";
+
   const {
     register,
     handleSubmit,
@@ -21,7 +25,7 @@ const Login = () => {
       await loginUser(data);
       console.log(data);
       reset();
-      navigate("/");
+      navigate(from, { replace: true });
     } catch (error) {
       console.error("Login Error:", error);
     }
