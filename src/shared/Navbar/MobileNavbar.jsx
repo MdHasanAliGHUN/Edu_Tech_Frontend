@@ -5,7 +5,8 @@ const MobileNavbar = ({ navLinks, setOpen }) => {
   const { user, logoutUser } = useUserHook();
 
   return (
-    <div className="md:hidden bg-white  py-4 px-6 space-y-3">
+    <div className="md:hidden bg-white py-4 px-6 space-y-3">
+      {/* Nav Links */}
       {navLinks.map((link) => (
         <div
           key={link.path}
@@ -25,16 +26,28 @@ const MobileNavbar = ({ navLinks, setOpen }) => {
         </div>
       ))}
 
-      {/* Mobile Login Button */}
-
-      <div className="pt-2">
+      {/* Mobile Login / Logout Buttons */}
+      <div className="pt-2 space-y-2">
         {user ? (
-          <button
-            onClick={logoutUser}
-            className="w-full px-6 py-1.5 bg-blue-600 text-white font-medium rounded-full hover:bg-blue-700 transition font-playfair cursor-pointer "
-          >
-            Log Out
-          </button>
+          <>
+            {/* Admin Panel */}
+            {user.role === "admin" && (
+              <Link
+                to="/admin"
+                onClick={() => setOpen(false)}
+                className="block w-full px-6 py-2 bg-blue-600 text-white font-medium rounded-full hover:bg-blue-700 transition text-center font-playfair"
+              >
+                Admin Panel
+              </Link>
+            )}
+            {/* Logout Button */}
+            <button
+              onClick={logoutUser}
+              className="w-full px-6 py-1.5 bg-blue-600 text-white font-medium rounded-full hover:bg-blue-700 transition text-center font-playfair"
+            >
+              Log Out
+            </button>
+          </>
         ) : (
           <Link
             to="/login"

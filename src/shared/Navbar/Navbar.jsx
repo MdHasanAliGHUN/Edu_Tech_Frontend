@@ -42,15 +42,28 @@ const Navbar = () => {
         </ul>
 
         {/* Right: Login Button (Desktop) */}
-        <div className="hidden md:block space-x-2">
+        <div className="hidden md:flex space-x-2 items-center">
           {user ? (
-            <button onClick={logoutUser} className="px-6 py-1.5 bg-blue-600 text-white font-medium rounded hover:bg-blue-700 transition font-playfair cursor-pointer">
-              Log Out
-            </button>
+            <>
+              {user.role === "admin" && (
+                <Link
+                  to="/admin"
+                  className="px-6 py-2 bg-blue-600 text-white font-medium rounded hover:bg-blue-700 transition font-playfair"
+                >
+                  Admin Panel
+                </Link>
+              )}
+              <button
+                onClick={logoutUser}
+                className="px-6 py-2 bg-blue-600 text-white font-medium rounded hover:bg-blue-700 transition font-playfair cursor-pointer"
+              >
+                Log Out
+              </button>
+            </>
           ) : (
             <Link
               to="/login"
-              className="px-6 py-2 bg-blue-600 text-white font-medium rounded hover:bg-blue-700 transition "
+              className="px-6 py-2 bg-blue-600 text-white font-medium rounded hover:bg-blue-700 transition"
             >
               Login
             </Link>
