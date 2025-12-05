@@ -29,7 +29,10 @@ const CourseCard = ({ course }) => {
           </span>
         </div>
       </div>
-      <NavLink to={`/courses-details/${course._id}`} className="block w-full bg-blue-600 text-center text-white px-3 py-1 rounded-sm hover:bg-blue-700 transition my-2">
+      <NavLink
+        to={`/courses-details/${course._id}`}
+        className="block w-full bg-blue-600 text-center text-white px-3 py-1 rounded-sm hover:bg-blue-700 transition my-2"
+      >
         View Details
       </NavLink>
     </div>

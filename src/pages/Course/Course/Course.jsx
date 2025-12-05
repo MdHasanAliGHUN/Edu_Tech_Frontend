@@ -1,5 +1,6 @@
 import SectionTitle from "../../../components/SectionTitle";
 import CourseCards from "../CourseCards/CourseCards";
+import CourseFilter from "../CourseFilter/CourseFilter";
 
 const Course = () => {
   return (
@@ -8,6 +9,7 @@ const Course = () => {
         title="Explore Our Course Library"
         subTitle="Learn modern web development skills from beginner to advanced — designed to match real-world industry needs."
       />
+      <CourseFilter/>
       <CourseCards/>
     </div>
   );
